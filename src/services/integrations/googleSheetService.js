@@ -11,11 +11,12 @@ const auth = new google.auth.GoogleAuth({
 });
 
 const sheets = google.sheets({ version: "v4", auth });
+const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
-export const addToSheet = async (spreadsheetId, data) => {
+export const addToSheet = async (data) => {
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: "Sheet1!A:D", // must match your headers
+    range: "Sheet1!A:D",
     valueInputOption: "RAW",
     requestBody: {
       values: [data],
